@@ -4,11 +4,16 @@
     <header>
       <nav id="navbar" class="nav">
         <ul class="nav-list">
-          <li><a href="#">Inici</a></li>
-          <li><a href="#">Combat</a></li>
+          <li>
+            <router-link to="/">Inici</router-link>
+          </li>
+          <li>
+            <router-link to="/combat">Combat</router-link>
+          </li>
         </ul>
       </nav>
     </header>
+
 
     <section class="cartesPokemon">
       <h1>Pokemon:</h1>
@@ -58,7 +63,8 @@ export default {
 
   components: {
     PokemonCard,
-    PokemonDetail
+    PokemonDetail,
+    Combat
   },
 
   data() {
@@ -67,6 +73,7 @@ export default {
       selectedPokemon: null,
       filter: '',
       showDetail: false
+      showCombat: false
     }
   },
 
