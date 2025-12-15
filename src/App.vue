@@ -72,7 +72,7 @@ export default {
       pokemons: [],
       selectedPokemon: null,
       filter: '',
-      showDetail: false
+      showDetail: false,
       showCombat: false
     }
   },
