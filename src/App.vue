@@ -89,6 +89,9 @@
   </div>
 </template>
 
+import PokemonCard from './components/PokemonCard.vue'
+import PokemonDetail from './components/PokemonDetail.vue'
+
 <script>
 export default {
   data() {
