@@ -12,8 +12,7 @@
 
     <section class="cartesPokemon">
       <h1>Pokemon:</h1>
-
-      <!-- BOTÓN GENERAR -->
+      
       <button
         class="generate-pokemon"
         v-if="!showDetail"
@@ -21,8 +20,7 @@
       >
         Generar Pokemon aleatoris
       </button>
-
-      <!-- FILTRO -->
+      
       <input
         class="pokemon-filter"
         v-if="!showDetail"
@@ -30,70 +28,39 @@
         placeholder="Filtra Pokemon per nom..."
         v-model="filter"
       >
-
-      <!-- LISTA -->
+      
       <div class="pokemon-container" v-if="!showDetail">
-        <div
-          class="pokemon-card"
+        <PokemonCard
           v-for="pokemon in filteredPokemons"
           :key="pokemon.id"
-          @click="openDetail(pokemon)"
-        >
-          <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-img">
-          <div class="pokemon-name">{{ pokemon.name }}</div>
-          <div class="pokemon-stat">Atac: {{ pokemon.attack }}</div>
-          <div class="pokemon-stat">Defensa: {{ pokemon.defense }}</div>
-          <div class="pokemon-type">
-            <span
-              v-for="type in pokemon.types"
-              :key="type"
-              :class="`type-${type}`"
-            >
-              {{ type }}
-            </span>
-          </div>
-        </div>
+          :pokemon="pokemon"
+          @select="openDetail"
+        />
       </div>
-
-      <!-- DETALLE -->
-      <div v-if="showDetail && selectedPokemon" class="pokemon-detail">
-        <h2>{{ selectedPokemon.name }}</h2>
-        <img
-          :src="selectedPokemon.image"
-          :alt="selectedPokemon.name"
-          class="pokemon-img"
-        >
-        <div class="pokemon-stat">Atac: {{ selectedPokemon.attack }}</div>
-        <div class="pokemon-stat">Defensa: {{ selectedPokemon.defense }}</div>
-        <div class="pokemon-type">
-          <span
-            v-for="type in selectedPokemon.types"
-            :key="type"
-            :class="`type-${type}`"
-          >
-            {{ type }}
-          </span>
-        </div>
-      </div>
-
-      <!-- VOLVER -->
-      <button
-        class="back-to-list"
-        v-if="showDetail"
-        @click="backToList"
-      >
-        Tornar a la llista
-      </button>
+      
+      <PokemonDetail
+        v-if="showDetail && selectedPokemon"
+        :pokemon="selectedPokemon"
+        @back="backToList"
+      />
 
     </section>
   </div>
 </template>
 
+<script>
 import PokemonCard from './components/PokemonCard.vue'
 import PokemonDetail from './components/PokemonDetail.vue'
+import Combat from './views/Combat.vue'
 
-<script>
 export default {
+  name: 'App',
+
+  components: {
+    PokemonCard,
+    PokemonDetail
+  },
+
   data() {
     return {
       pokemons: [],
